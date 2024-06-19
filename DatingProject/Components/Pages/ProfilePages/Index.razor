@@ -1,0 +1,26 @@
+﻿@page "/profiles"
+@using Microsoft.AspNetCore.Components.QuickGrid
+@inject DatingProject.Data.AppDbContext DB
+@using DatingProject.Data
+
+<PageTitle>Index</PageTitle>
+
+<h1>Index</h1>
+
+<p>
+    <a href="profiles/create">Create New</a>
+</p>
+
+<QuickGrid Class="table" Items="DB.Profiles">
+    <PropertyColumn Property="profile => profile.Height" />
+    <PropertyColumn Property="profile => profile.Weight" />
+    <PropertyColumn Property="profile => profile.BirthDate" />
+    <PropertyColumn Property="profile => profile.NickName" />
+    <PropertyColumn Property="profile => profile.Gender" />
+
+    <TemplateColumn Context="profile">
+        <a href="@($"profiles/edit?profileid={profile.ProfileId}")">Edit</a> |
+        <a href="@($"profiles/details?profileid={profile.ProfileId}")">Details</a> |
+        <a href="@($"profiles/delete?profileid={profile.ProfileId}")">Delete</a>
+    </TemplateColumn>
+</QuickGrid>

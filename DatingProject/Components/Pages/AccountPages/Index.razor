@@ -1,0 +1,27 @@
+﻿@page "/accounts"
+@using Microsoft.AspNetCore.Components.QuickGrid
+@inject DatingProject.Data.AppDbContext DB
+@using DatingProject.Data
+
+<PageTitle>Index</PageTitle>
+
+<h1>Index</h1>
+
+<p>
+    <a href="accounts/create">Create New</a>
+</p>
+
+<QuickGrid Class="table" Items="DB.Accounts">
+    <PropertyColumn Property="account => account.FirstName" />
+    <PropertyColumn Property="account => account.LastName" />
+    <PropertyColumn Property="account => account.Email" />
+    <PropertyColumn Property="account => account.UserName" />
+    <PropertyColumn Property="account => account.Password" />
+    <PropertyColumn Property="account => account.CreatedDate" />
+
+    <TemplateColumn Context="account">
+        <a href="@($"accounts/edit?accountsid={account.AccountsId}")">Edit</a> |
+        <a href="@($"accounts/details?accountsid={account.AccountsId}")">Details</a> |
+        <a href="@($"accounts/delete?accountsid={account.AccountsId}")">Delete</a>
+    </TemplateColumn>
+</QuickGrid>
